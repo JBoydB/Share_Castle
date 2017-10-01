@@ -1,0 +1,2 @@
+class UserCastlesController < ApplicationController
+end
