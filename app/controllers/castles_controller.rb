@@ -6,7 +6,7 @@ class CastlesController < ApplicationController
 
   def create
     @castle = Castle.new(
-      user_id: @current_user.id,
+      user_id: 1,
       castle_name: params[:castle_name]
       )
     if @castle.save
