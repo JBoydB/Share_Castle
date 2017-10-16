@@ -1,1 +1,9 @@
-new.html.erb
+<h1> Create a New Castle </h1>
+
+<%= form_tag '', method: :post do %>
+  <div>
+    <%= label_tag :title %>
+    <%= text_field_tag :title %>
+  </div>
+  <input type="submit" value="Create">
+<%end%>

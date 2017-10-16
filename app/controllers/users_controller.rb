@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       last_name: params[:last_name],
       email: params[:email],
       password: params[:password],
-      confirm_password: params[:confirm_password]
+      password_confirmation: params[:confirm_password]
     )
     if user.save
       session[:user_id] = user.id
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    #build current_user first
   end
 
   def update

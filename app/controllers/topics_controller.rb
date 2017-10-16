@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(
-     castle_id: params[:id],
+     castle_id: params[:castle_id],
      title: params[:title]
     )
     if @topic.save

@@ -1,1 +1,5 @@
-edit.html.erb
+<%= form_tag "/castles/#{@castle.id}", method: :patch do %>
+  <div>
+    Rename Your Castle: <input type="text" name="castle_name" value="<%=@castle.castle_name%>">
+  </div>
+<%end%>
