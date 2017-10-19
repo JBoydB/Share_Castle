@@ -22,9 +22,18 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find_by(id: current_user.id)
   end
 
   def update
-    #build current_user first ; embed edit in show page
+    user = User.find_by(id: current_user.id)
+    user.update(
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+      )
+    redirect_to "/profile"
   end
 end

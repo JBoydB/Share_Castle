@@ -1,2 +1,27 @@
 <h1>Profile</h1>
-
+<h2> Edit your profile information bellow </h2>
+<%= form_tag '/profile/', method: :patch do %>
+  <div>
+    First Name:
+    <input type='text' name='first_name' value='<%=current_user.first_name%>'>
+  </div>
+  <div>
+    Last Name:
+    <input type='text' name='last_name' value='<%=current_user.last_name%>'>
+  </div>
+  <div>
+    Email:
+    <input type='text' name='email' value='<%=current_user.email%>'>
+  </div>
+  <div>
+    Password:
+    <input type='password' name='password'>
+  </div>
+  <div>
+    Password Confirmation:
+    <input type='password' name='password_confirmation'>
+  </div>  
+  <div>
+    <input type='submit' value='Save Changes'>
+  </div>
+<%end%>

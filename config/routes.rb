@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   patch "/profile" => "users#update" #method TBB
 
   
-  get "/" => "pages#landingpage"
+  root to: "pages#landingpage"
 
   get "/login" => "sessions#new"
   post "/login" => "sessions#create"
