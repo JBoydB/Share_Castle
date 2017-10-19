@@ -23,6 +23,7 @@ class CastlesController < ApplicationController
 
   def show
     @castle = Castle.find(params[:id])
+    @topics = Topic.where(castle_id: params[:id])
     render :show
   end
 

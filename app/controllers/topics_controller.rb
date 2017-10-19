@@ -17,14 +17,19 @@ class TopicsController < ApplicationController
   end
 
   def edit
+    @topic = Topic.find(params[:topic_id])
     render :edit
   end
 
   def update
+    @topic = Topic.find(params[:topic_id])
+    @topic.title = params[:title]
+    @topic.save
     redirect_to "/castles/#{@topic.castle_id}/#{@topic.id}"
   end
 
   def show
+    @topic = Topic.find(params[:topic_id])
     render :show
   end
 

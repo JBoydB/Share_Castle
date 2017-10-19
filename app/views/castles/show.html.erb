@@ -1,1 +1,9 @@
-<h1> Welcome to <%=@castle.castle_name %></h1>
+<h1> Welcome to <%= @castle.castle_name %></h1>
+
+<% @topics.each do |topic| %>
+  <div>
+    <a href='/castles/<%=topic.castle_id%>/<%=topic.id%>'>
+      <%= topic.title %>
+    </a>
+  </div>
+<%end%>

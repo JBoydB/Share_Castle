@@ -1,1 +1,8 @@
-edit.html.erb
+<%= form_tag "/castles/#{@topic.castle_id}/#{@topic.id}", method: :patch do %>
+  <div>
+    Rename Topic: <input type="text" name="title" value="<%=@topic.title%>">
+  </div>
+  <div>
+    <input type='submit' value='Save Changes'>
+  </div>
+<%end%>

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   delete "/castles/:id" => "castles#destroy"
 
   get "/castles/:castle_id/new" => "topics#new"
-  get "/castles/:castle_id/:topics_id" => "topics#show"
+  get "/castles/:castle_id/:topic_id" => "topics#show"
   post "castles/:castle_id/:topic_id" => "topics#create"
   get "/castles/:castle_id/:topic_id/edit" => "topics#edit"
   patch "/castles/:castle_id/:topic_id" => "topics#update"
