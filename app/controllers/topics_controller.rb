@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
 
   def new
+    @castle = Castle.find_by(id: params[:castle_id])
     render :new
   end
 
@@ -30,6 +31,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:topic_id])
+    @entries = Entry.where(topic_id: params[:topic_id])
     render :show
   end
 

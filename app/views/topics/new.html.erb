@@ -1,6 +1,6 @@
 <h1> Create a New Topics </h1>
 
-<%= form_tag '', method: :post do %>
+<%= form_tag "/castles/#{@castle.id}", method: :post do %>
   <div>
     <%= label_tag :title %>
     <%= text_field_tag :title %>

@@ -1,1 +1,9 @@
 <h1> <%= @topic.title %> </h1>
+
+<h2>
+  <% @entries.each do |entry| %>
+    <div>
+      <%= entry.entry %>
+    </div>
+  <%end%>
+</h2>

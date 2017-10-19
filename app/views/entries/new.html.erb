@@ -1,1 +1,9 @@
-new.html.erb
+<h1> Create a New Entry </h1>
+
+<%= form_tag "/castles/#{@castle.id}/#{@topic.id}", method: :post do %>
+  <div>
+    <%= label_tag :entry %>
+    <%= text_field_tag :entry %>
+  </div>
+  <input type="submit" value="Create">
+<%end%>
