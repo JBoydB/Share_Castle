@@ -31,7 +31,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:topic_id])
-    @entries = Entry.where(topic_id: params[:topic_id])
+    @entries = Entry.where(topic_id:   params[:topic_id])
     render :show
   end
 
