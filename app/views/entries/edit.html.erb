@@ -1,1 +1,8 @@
-edit.html.erb
+<%= form_tag "/castles/#{@entry.topic.castle_id}/#{@entry.topic.id}/#{@entry.id}", method: :patch do %>
+  <div>
+    Edit Entry: <input type="text" name="entry" value="<%=@entry.entry%>">
+  </div>
+  <div>
+    <input type='submit' value='Save Changes'>
+  </div>
+<%end%>

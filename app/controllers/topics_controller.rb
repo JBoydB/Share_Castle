@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-
+  before_action :authenticate_user!
   def new
     @castle = Castle.find_by(id: params[:castle_id])
     render :new
@@ -31,11 +31,13 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:topic_id])
-    @entries = Entry.where(topic_id:   params[:topic_id])
+    @entries = Entry.where(topic_id: params[:topic_id])
     render :show
   end
 
   def destroy
-    redirect_to "/castles/#{@topic.castle_id}"
+    @topic = Topic.find(params[:topic_id])
+    @topic.destroy
+    redirect_to "/castles/#{params[:castle_id]}"
   end
 end

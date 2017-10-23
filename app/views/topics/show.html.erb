@@ -1,9 +1,16 @@
 <h1> <%= @topic.title %> </h1>
 
 <h2>
-  <% @entries.each do |entry| %>
-    <div>
-      <%= entry.entry %>
-    </div>
-  <%end%>
+  <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/new"%>> New Entry</a>
 </h2>
+<% @entries.each do |entry| %>
+  <div>
+    <p>
+      <%= entry.entry %>
+      <a href=<%="/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}/edit"%>>Edit</a>
+      <%= form_tag "/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}", method: :delete do %>
+        <input type="submit" value="Delete">
+      <%end%>
+    </p>
+  </div>
+<%end%>

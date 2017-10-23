@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   get "/logout" => "sessions#destroy"
 
-  get "/castles" => "user_castles#index" #???
+  get "/castles" => "user_castles#index"
+  post "/castles/invite" => "user_castles#create"
 
   get "/castles/new" => "castles#new"
   post "/castles" => "castles#create"

@@ -1,10 +1,13 @@
 <h1>Castles</h1>
+<h2><a href="/castles/new">Create a Castle</a></h2>
 
-castles: 
-<% @user_castles.each do |castle| %>
+<% @user_castles.each do |user_castle| %>
   <div>
-    <a href='/castles/<%=castle.id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
-  Castle: <%= castle.castle.castle_name %> <br>
-  Ruled by: <%= castle.user.first_name %>
+    <a href='/castles/<%=user_castle.castle_id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
+  Castle: <%= user_castle.castle.castle_name %> <br>
+  Ruled by: <%= user_castle.user.first_name %>
+  <%= form_tag "/castles/#{user_castle.castle_id}/", method: :delete do %>
+    <input type="submit" value="Delete">
+  <%end%>
   </div>
 <% end %>
