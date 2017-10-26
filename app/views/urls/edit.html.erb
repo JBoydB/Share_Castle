@@ -1,0 +1,9 @@
+<%= form_tag "/castles/#{@url.topic.castle_id}/#{@url.topic.id}/url/#{@url.id}", method: :patch do %>
+  <div>
+    Edit Url: <input type="text" name="url" value="<%=@url.url%>">
+    Edit Url Type: <input type="string" name="url_type" value="<%=@url.url_type%>">
+  </div>
+  <div>
+    <input type='submit' value='Save Changes'>
+  </div>
+<%end%>

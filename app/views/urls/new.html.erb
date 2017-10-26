@@ -1,0 +1,13 @@
+<h1> Add a New URL </h1>
+
+<%= form_tag "/castles/#{@castle.id}/#{@topic.id}/url", method: :post do %>
+  <div>
+    <%= label_tag :url %>
+    <%= text_field_tag :url %>
+  </div>
+  <div>
+    <%= label_tag :url_type %>
+    <%= select_tag :url_type, raw("<option>Resource Link</option><option>Image</option><option>Video</option>") %>
+  </div>
+  <input type="submit" value="Create">
+<%end%>

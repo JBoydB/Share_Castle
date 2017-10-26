@@ -31,7 +31,8 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:topic_id])
-    @entries = Entry.where(topic_id: params[:topic_id])
+    @resource_links = @topic.urls.where(topic_id: params[:topic_id], url_type: "Resource Link")
+    @image_links = @topic.urls.where(topic_id: params[:topic_id], url_type: "Image")
     render :show
   end
 

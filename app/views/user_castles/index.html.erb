@@ -6,8 +6,7 @@
     <a href='/castles/<%=user_castle.castle_id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
   Castle: <%= user_castle.castle.castle_name %> <br>
   Ruled by: <%= user_castle.user.first_name %>
-  <%= form_tag "/castles/#{user_castle.castle_id}/", method: :delete do %>
-    <input type="submit" value="Delete">
-  <%end%>
+    <a data-confirm="Deleting this Castle is permanent and can not be undone, all information within this Castle will be deleted. Do you wish to continue?" data-method="delete" href="/castles/<%=user_castle.castle_id%>/"> <button>Delete</button></a>
+    <a href='/castles/<%=user_castle.castle_id%>/edit'><button>Rename</button>
   </div>
 <% end %>

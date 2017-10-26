@@ -6,12 +6,15 @@ class UserCastlesController < ApplicationController
   end
 
   def create
-    castle_user = UserCastle.new(
-      user_id: User.find_by(email: params[:user_email]).id,
-      castle_id: params[:castle_id]
-      )
-    castle_user.save
+    if User.find_by(email: params[:user_email])
+      castle_user = UserCastle.new(
+        user_id: User.find_by(email: params[:user_email]).id,
+        castle_id: params[:castle_id]
+        )
+      castle_user.save
+    else
+      flash[:warning] = "Share Castle account could not be found, please verify the email address entered"
+    end
     redirect_to "/castles/#{params[:castle_id]}"
   end
-
 end
