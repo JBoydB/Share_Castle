@@ -35,11 +35,21 @@
 <% @image_links.each do |url| %>
   <div>
     <p>
-      <%= url.url %>
+      <img src=<%= url.url %>>
       <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
       <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
         <input type="submit" value="Delete">
       <%end%>
     </p>
+  </div>
+<%end%>
+
+<h2>YouTube Supporting Videos</h2>
+<% @video_links.each do |video| %>
+  <div>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allowfullscreen></iframe>
+    <%= form_tag "/castles/#{video.topic.castle_id}/#{video.topic.id}/url/#{video.id}", method: :delete do %>
+      <input type="submit" value="Delete">
+    <%end%>
   </div>
 <%end%>

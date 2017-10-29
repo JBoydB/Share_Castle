@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   get "/castles/:castle_id/:topic_id/url/new" => "urls#new"
   post "/castles/:castle_id/:topic_id/url" => "urls#create"
-  get "/castles/:castle_id/:topic_id/:url_id/edit" => "urls#edit"
+  get "/castles/:castle_id/:topic_id/url/:url_id/edit" => "urls#edit"
   patch "/castles/:castle_id/:topic_id/url/:url_id" => "urls#update"
   delete "/castles/:castle_id/:topic_id/url/:url_id" => "urls#destroy"
 end

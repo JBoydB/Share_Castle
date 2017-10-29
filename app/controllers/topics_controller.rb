@@ -33,6 +33,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @resource_links = @topic.urls.where(topic_id: params[:topic_id], url_type: "Resource Link")
     @image_links = @topic.urls.where(topic_id: params[:topic_id], url_type: "Image")
+    @video_links = @topic.urls.where(topic_id: params[:topic_id], url_type: "Video")
     render :show
   end
 

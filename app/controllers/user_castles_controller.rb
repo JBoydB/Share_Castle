@@ -1,7 +1,8 @@
 class UserCastlesController < ApplicationController
   before_action :authenticate_user!
   def index
-     @user_castles = current_user.user_castles.where(user_id: current_user.id)
+     @users_castles = current_user.castles.where(user_id: current_user.id)
+     @castles_users = current_user.user_castles.where(user_id: current_user.id)
      render :index
   end
 

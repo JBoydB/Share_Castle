@@ -13,6 +13,9 @@ class UrlsController < ApplicationController
      url: params[:url],
      url_type: params[:url_type]
     )
+    if @url.url_type == "Video"
+      @url.url.slice!("https://www.youtube.com/watch?v=")
+    end
     if @url.save
       redirect_to "/castles/#{@topic.castle_id}/#{@topic.id}"
     else
