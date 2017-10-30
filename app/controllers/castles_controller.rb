@@ -13,7 +13,8 @@ class CastlesController < ApplicationController
     if @castle.save
       @castle_member = UserCastle.new(
         user_id: current_user.id,
-        castle_id: @castle.id
+        castle_id: @castle.id,
+        role: "Owner"
         )
       @castle_member.save
       redirect_to "/castles/#{@castle.id}"

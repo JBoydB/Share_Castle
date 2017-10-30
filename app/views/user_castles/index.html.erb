@@ -1,18 +1,18 @@
 <h1>Castles</h1>
 <h3><a href="/castles/new">Create a Castle</a></h3>
 
-<h2>Castles You Created:<h2>
+<h2>Castles You Created:</h2>
 <% @users_castles.each do |user_castle| %>
   <div>
-    <a href='/castles/<%=user_castle.castle_id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
-  Castle: <%= user_castle.castle.castle_name %> <br>
+    <a href='/castles/<%=user_castle.id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
+  Castle: <%= user_castle.castle_name %> <br>
   Ruled by: <%= user_castle.user.first_name %>
-    <a data-confirm="Deleting this Castle is permanent and can not be undone, all information within this Castle will be deleted. Do you wish to continue?" data-method="delete" href="/castles/<%=user_castle.castle_id%>/"> <button>Delete</button></a>
-    <a href='/castles/<%=user_castle.castle_id%>/edit'><button>Rename</button>
+    <a data-confirm="Deleting this Castle is permanent and can not be undone, all information within this Castle will be deleted. Do you wish to continue?" data-method="delete" href="/castles/<%=user_castle.id%>/"> <button>Delete</button></a>
+    <a href='/castles/<%=user_castle.id%>/edit'><button>Rename</button></a>
   </div>
 <% end %>
 
-<h2>Castles you're a part of:<h2>
+<h2>Castles you're a part of:</h2>  
 <% @castles_users.each do |castle_user| %>
   <div>
     <a href='/castles/<%=castle_user.castle_id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
