@@ -19,4 +19,16 @@ class UserCastlesController < ApplicationController
     end
     redirect_to "/castles/#{params[:castle_id]}"
   end
+
+  def update
+    @user_castle = UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id])
+    @user_castle.update(role: params[:role])
+    render :members
+  end
+
+  def destroy
+    @user_castle = UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id])
+    @user_castle.destroy
+    redirect_to "/castles/#{params[:castle_id]}"
+  end
 end

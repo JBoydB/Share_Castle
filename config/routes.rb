@@ -15,10 +15,13 @@ Rails.application.routes.draw do
 
   get "/castles" => "user_castles#index"
   post "/castles/invite" => "user_castles#create"
+  patch "/castles" => "user_castles#update"
+  delete "/castles" => "user_castles#delete"
 
   get "/castles/new" => "castles#new"
   post "/castles" => "castles#create"
   get "/castles/:id" => "castles#show"
+  get "/castles/:id/members" => "castles#members"
   get "/castles/:id/edit" => "castles#edit"
   patch "/castles/:id" => "castles#update"
   delete "/castles/:id" => "castles#destroy"

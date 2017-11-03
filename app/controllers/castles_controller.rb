@@ -66,4 +66,14 @@ class CastlesController < ApplicationController
     end
   end
 
+  def members
+    if UserCastle.find_by(user_id: current_user.id, castle_id: params[:id]).role == "Member"
+      flash[:warning] = "You do not have permission to complete this action"
+      redirect_to "/castles/#{params[:id]}/"
+    else
+      @castle = Castle.find(params[:id])
+      @members = UserCastle.where(castle_id: params[:id])
+      render :members
+    end
+  end
 end
