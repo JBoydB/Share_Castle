@@ -1,20 +1,26 @@
 <h1> <%= @topic.title %> </h1>
+<!-- Role permission check -->
+<h4><%=@role%></h4>
+  <% if @role != "Member" %>
+  <h2>
+    <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/new"%>> New Entry</a>
+  </h2>
+  <h2>
+    <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/url/new"%>> New URL</a>
+  </h2>
+<%end%>
 
-<h2>
-  <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/new"%>> New Entry</a>
-</h2>
-<h2>
-  <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/url/new"%>> New URL</a>
-</h2>
 <% @topic.entries.each do |entry| %>
   <div>
     <p>
       <%= entry.entry %>
+    </p>
+    <% if @role != "Member" %>
       <a href=<%="/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}/edit"%>>Edit</a>
       <%= form_tag "/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}", method: :delete do %>
         <input type="submit" value="Delete">
       <%end%>
-    </p>
+    <%end%>
   </div>
 <%end%>
 
@@ -23,10 +29,12 @@
   <div>
     <p>
       <%= url.url %>
-      <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
-      <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
+      <% if @role != "Member" %>
+        <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
+        <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
         <input type="submit" value="Delete">
       <%end%>
+    <%end%>
     </p>
   </div>
 <%end%>
@@ -36,9 +44,11 @@
   <div>
     <p>
       <img src=<%= url.url %>>
-      <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
-      <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
-        <input type="submit" value="Delete">
+      <% if @role != "Member" %>
+        <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
+        <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
+          <input type="submit" value="Delete">
+        <%end%>
       <%end%>
     </p>
   </div>
@@ -48,8 +58,10 @@
 <% @video_links.each do |video| %>
   <div>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allowfullscreen></iframe>
-    <%= form_tag "/castles/#{video.topic.castle_id}/#{video.topic.id}/url/#{video.id}", method: :delete do %>
-      <input type="submit" value="Delete">
-    <%end%>
+      <% if @role != "Member" %>
+        <%= form_tag "/castles/#{video.topic.castle_id}/#{video.topic.id}/url/#{video.id}", method: :delete do %>
+          <input type="submit" value="Remove">
+        <%end%>
+      <%end%>
   </div>
 <%end%>

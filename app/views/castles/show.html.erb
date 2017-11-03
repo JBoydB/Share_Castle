@@ -1,14 +1,19 @@
 <h1> Welcome to <%= @castle.castle_name %></h1>
-<a href=<%="/castles/#{@castle.id}/new"%>>Add New Topic</a>
 
-<h3>Invite Member to Castle
-  <%= form_tag "/castles/invite", method: :post do %>
-    <input type="text" name="user_email">
-    <input type="submit" value="Invite">
-    <input type="hidden" value="<%=@castle.id%>", name="castle_id">
-  <%end%>
-</h3>
+<!-- New topic button and member invitation are not available to members -->
+<%if @role != 'Member' %>
+  <a href=<%="/castles/#{@castle.id}/new"%>>Add New Topic</a>
+  <h3>Invite Member to Castle
+    <%= form_tag "/castles/invite", method: :post do %>
+      <input type="text" name="user_email">
+      <input type="submit" value="Invite">
+      <input type="hidden" value="<%=@castle.id%>", name="castle_id">
+    <%end%>
+  </h3>
+<%end%>
+<!-- end -->
 
+<!-- Topics titles are looped for selection, edit and delete buttons are not available to members-->
 <h2>Topics:</h2>
 <% @topics.each do |topic| %>
   <div>
@@ -16,10 +21,13 @@
       <%= topic.title %>
     </a>
   </div>
-  <div>
-    <a href="/castles/<%=topic.castle_id%>/<%=topic.id%>/edit">Edit</a>
-  </div>
-  <%= form_tag "/castles/#{@castle.id}/#{topic.id}", method: :delete do %>
-    <input type="submit" value="Delete">
+  <%if @role != 'Member' %>
+    <div>
+      <a href="/castles/<%=topic.castle_id%>/<%=topic.id%>/edit">Edit</a>
+    </div>
+    <%= form_tag "/castles/#{@castle.id}/#{topic.id}", method: :delete do %>
+      <input type="submit" value="Delete">
+    <%end%>
   <%end%>
 <%end%>
+<!-- end -->
