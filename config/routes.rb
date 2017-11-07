@@ -33,6 +33,10 @@ Rails.application.routes.draw do
   patch "/castles/:castle_id/:topic_id" => "topics#update"
   delete "/castles/:castle_id/:topic_id" => "topics#destroy"
 
+  get "/castles/:castle_id/:topic_id/related_topics" => "related_topics#index"
+  post "/castles/:castle_id/:topic_id/related_topics" => "related_topics#create"
+  delete "/castles/:castle_id/:topic_id/related_topics" => "related_topics#destroy"
+
   get "/castles/:castle_id/:topic_id/new" => "entries#new"
   post "/castles/:castle_id/:topic_id" => "entries#create"
   get "/castles/:castle_id/:topic_id/:entry_id/edit" => "entries#edit"

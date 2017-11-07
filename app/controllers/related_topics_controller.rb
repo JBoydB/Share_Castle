@@ -1,0 +1,2 @@
+class RelatedTopicsController < ApplicationController
+end

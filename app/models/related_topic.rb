@@ -1,0 +1,3 @@
+class RelatedTopic < ApplicationRecord
+
+end

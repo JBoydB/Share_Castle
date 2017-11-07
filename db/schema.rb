@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171029232445) do
+ActiveRecord::Schema.define(version: 20171106002112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "castle_groups", force: :cascade do |t|
+    t.integer "leading_castle_id"
+    t.integer "joining_castle_id"
+    t.string "join_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "castles", force: :cascade do |t|
     t.integer "user_id"
@@ -25,6 +33,13 @@ ActiveRecord::Schema.define(version: 20171029232445) do
   create_table "entries", force: :cascade do |t|
     t.integer "topic_id"
     t.text "entry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "related_topics", force: :cascade do |t|
+    t.integer "topic_id"
+    t.integer "related_topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

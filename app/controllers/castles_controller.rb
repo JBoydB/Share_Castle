@@ -19,15 +19,20 @@ class CastlesController < ApplicationController
       @castle_member.save
       redirect_to "/castles/#{@castle.id}"
     else
+      p @castle.errors.messages
       render :new
     end
   end
 
   def show
-    @role = UserCastle.find_by(user_id: current_user.id, castle_id: params[:id]).role
-    @castle = Castle.find(params[:id])
-    @topics = Topic.where(castle_id: params[:id])
-    render :show
+    if UserCastle.find_by(user_id: current_user.id, castle_id: params[:id])
+      @role = UserCastle.find_by(user_id: current_user.id, castle_id: params[:id]).role
+      @castle = Castle.find(params[:id])
+      @topics = Topic.where(castle_id: params[:id])
+      render :show
+    else
+      redirect_to "/castles"
+    end
   end
 
   def edit

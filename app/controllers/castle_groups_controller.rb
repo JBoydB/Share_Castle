@@ -1,0 +1,3 @@
+class CastleGroupsController < ApplicationController
+
+end

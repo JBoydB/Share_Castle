@@ -1,0 +1,13 @@
+
+Choose a Castle to link to:
+<% @users_castles.each do |user_castle| %>
+  <div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"> <br>
+  Castle: <%= user_castle.castle.castle_name %> <br>
+  Ruled by: <%= user_castle.user.first_name %>
+  <%= form_tag "/castles/:castle_id/join", method: :post do %>
+      <input type="hidden" value="<%=user_castle.castle_id%>" name="joining_castle_id">
+      <input type="submit" value="Request Join">
+  <%end%>
+  </div>
+<% end %>
