@@ -2,6 +2,7 @@ class CastlesController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    @castle = Castle.new()
     render :new
   end
 
