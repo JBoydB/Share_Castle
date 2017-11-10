@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   
   get "/signup" => "users#new"
   post "/users" => "users#create"
-  get "/profile" => "users#show" #method TBB
-  patch "/profile" => "users#update" #method TBB
-
+  get "/profile" => "users#show"
+  patch "/profile" => "users#update"
   
   root to: "pages#landingpage"
 
