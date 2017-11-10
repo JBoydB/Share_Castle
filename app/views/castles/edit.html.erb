@@ -6,3 +6,7 @@
     <input type='submit' value='Save Changes'>
   </div>
 <%end%>
+Upload a new image for your Castle Homepage:
+<%= form_for @castle, url: users_path, html: { multipart: true } do |form| %>
+  <%= form.file_field :image %>
+<% end %>

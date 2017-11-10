@@ -8,7 +8,8 @@ class CastlesController < ApplicationController
   def create
     @castle = Castle.new(
       user_id: current_user.id,
-      castle_name: params[:castle_name]
+      castle_name: params[:castle_name],
+      image: params[:image]
       )
     if @castle.save
       @castle_member = UserCastle.new(
