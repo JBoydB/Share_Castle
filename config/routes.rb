@@ -14,19 +14,21 @@ Rails.application.routes.draw do
 
   get "/castles" => "user_castles#index"
   post "/castles/invite" => "user_castles#create"
-  patch "/castles" => "user_castles#update"
-  delete "/castles" => "user_castles#delete"
 
   get "/castles/new" => "castles#new"
   post "/castles" => "castles#create"
   get "/castles/:id" => "castles#show"
-  get "/castles/:id/members" => "castles#members"
+  get "/castles/:castle_id/members" => "user_castles#members"
   get "/castles/:id/edit" => "castles#edit"
   patch "/castles/:id" => "castles#update"
   delete "/castles/:id" => "castles#destroy"
 
   get "/castles/:castle_id/new" => "topics#new"
-  post "castles/:castle_id/" => "topics#create"  
+  post "castles/:castle_id/" => "topics#create"
+
+  patch "/castles/:castle_id/:user_id/members" => "user_castles#update"
+  delete "/castles/:castle_id/:user_id/members" => "user_castles#destroy"
+
   get "/castles/:castle_id/:topic_id" => "topics#show"
   get "/castles/:castle_id/:topic_id/edit" => "topics#edit"
   patch "/castles/:castle_id/:topic_id" => "topics#update"

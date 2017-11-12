@@ -21,19 +21,36 @@ class UserCastlesController < ApplicationController
   end
 
   def update
-    @user_castle = UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id])
-    p "test"
-    p @user_castle
-    p params[:id]
-    p current_user.id
-    @user_castle.role = "Admin"
-    @user_castle.save
-    redirect_to "castles/#{params[:castle_id]}/members"
+    if UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id]).role == "Member"
+      flash[:warning] = "You do not have permission to complete this action"
+      redirect_to "/castles/#{params[:castle_id]}/"
+    else
+      @member = UserCastle.find_by(user_id: params[:user_id], castle_id: params[:castle_id])
+      @member.role = params[:role]
+      @member.save
+      redirect_to "/castles/#{params[:castle_id]}/members"
+    end
   end
 
   def destroy
-    @user_castle = UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id])
-    @user_castle.destroy
-    redirect_to "/castles/#{params[:castle_id]}"
+    if UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id]).role == "Member"
+      flash[:warning] = "You do not have permission to complete this action"
+      redirect_to "/castles/#{params[:castle_id]}/"
+    else
+      @user_castle = UserCastle.find_by(user_id: params[:user_id], castle_id: params[:castle_id])
+      @user_castle.destroy
+      redirect_to "/castles/#{params[:castle_id]}/members"
+    end
+  end
+
+  def members
+    if UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id]).role == "Member"
+      flash[:warning] = "You do not have permission to complete this action"
+      redirect_to "/castles/#{params[:castle_id]}/"
+    else
+      @castle = Castle.find(params[:castle_id])
+      @members = UserCastle.where(castle_id: params[:castle_id])
+      render :members
+    end
   end
 end

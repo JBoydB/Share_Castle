@@ -6,12 +6,12 @@
   Member Email: <%= member.user.email %><br>
   Member Role: <%= member.role %></p>
   <% if member.role != "Owner" %>
-    <%= form_tag "/castles/", method: :patch do %>
+    <%= form_tag "/castles/#{params[:castle_id]}/#{member.user.id}/members", method: :patch do %>
       <%= label_tag "Permission Role" %>
       <%= select_tag :role, options_for_select(["Member", "Admin"], member.role) %>
       <input type='submit' value='Save'>
     <%end%>
-    <%= form_tag "/castles/", method: :delete do %>
+    <%= form_tag "/castles/#{params[:castle_id]}/#{member.user.id}/members", method: :delete do %>
       <input type='submit' value='Remove User'>
     <%end%>
   <%end%>
