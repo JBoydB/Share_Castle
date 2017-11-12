@@ -13,7 +13,7 @@
   </h3>
 <%end%>
 <!-- end -->
-<%= image_tag @castle.image.url(:square) %>
+<%=image_tag @castle.avatar.url %>
 <!-- Topics titles are looped for selection, edit and delete buttons are not available to members-->
 <h2>Topics:</h2>
 <% @topics.each do |topic| %>

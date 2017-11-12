@@ -1,6 +1,8 @@
 class CastlesController < ApplicationController
   before_action :authenticate_user!
 
+  attr_accessor :avatar_file_name
+
   def new
     @castle = Castle.new()
     render :new
@@ -10,7 +12,7 @@ class CastlesController < ApplicationController
     @castle = Castle.new(
       user_id: current_user.id,
       castle_name: params[:castle_name],
-      image: params[:image]
+      avatar: params[:avatar]
       )
     if @castle.save
       @castle_member = UserCastle.new(
@@ -53,7 +55,21 @@ class CastlesController < ApplicationController
       redirect_to "/castles/#{params[:id]}/"
     else
       @castle = Castle.find(params[:id])
-      @castle.castle_name = params[:castle_name]
+      puts "check for params Ava."
+      puts params[:avatar]
+      if params[:avatar]
+        @castle.avatar = nil
+        puts "check that avatar is removed"
+        puts @castle.avatar
+        @castle.update(
+          castle_name: params[:castle_name],
+          avatar: params[:avatar]
+          )
+      else
+        @castle.update(
+          castle_name: params[:castle_name]
+          )
+      end
       if @castle.save
         redirect_to "/castles/#{@castle.id}"
       else

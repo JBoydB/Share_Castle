@@ -1,13 +1,12 @@
 <h1> Create a New Castle </h1>
 
-<%= form_tag '/castles', method: :post do %>
+<%= form_tag "/castles", multipart: true, method: :post do %>
   <div>
     <%= label_tag :castle_name %>
     <%= text_field_tag :castle_name %>
   </div>
+  <div>
+    <%= file_field_tag :avatar %>
+  </div>
   <input type="submit" value="Create">
 <%end%>
-Upload an Image for your Castle Homepage:
-<%= form_for @castle, url: users_path, html: { multipart: true } do |form| %>
-  <%= form.file_field :image %>
-<% end %>

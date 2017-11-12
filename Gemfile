@@ -6,9 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 gem 'dotenv-rails'
-gem 'paperclip'
-gem 'aws-sdk', '~> 2.3'
-gem 'rmagick'
+gem 'paperclip', "~> 5.0.0"
+#gem 'aws-sdk', '~> 2.3'
 
 gem 'bootstrap'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

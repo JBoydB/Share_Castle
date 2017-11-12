@@ -5,6 +5,12 @@ class Castle < ApplicationRecord
   has_many :castle_members, through: :user_castles, source: :user, dependent: :destroy
   has_many :topics, dependent: :destroy
 
-  has_attached_file :image, styles: {medium: "300x300>", thumb: "100x100>" }, default_url: "https://s3-us-west-1.amazonaws.com/sharecastlefiles/pexels-photo-406014.jpeg"
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+  has_attached_file :avatar,
+                      :styles => { :medium => "150x150>", :thumb => "44x44#" },
+                      :default_url => "/images/default_avatar.jpg"
+
+    validates_attachment :avatar, :presence => true,
+                         :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] },
+                         :size => { :in => 0..1000.kilobytes }
+
 end
