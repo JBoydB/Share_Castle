@@ -22,8 +22,13 @@ class UserCastlesController < ApplicationController
 
   def update
     @user_castle = UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id])
-    @user_castle.update(role: params[:role])
-    render :members
+    p "test"
+    p @user_castle
+    p params[:id]
+    p current_user.id
+    @user_castle.role = "Admin"
+    @user_castle.save
+    redirect_to "castles/#{params[:castle_id]}/members"
   end
 
   def destroy

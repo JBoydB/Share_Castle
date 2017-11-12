@@ -55,12 +55,7 @@ class CastlesController < ApplicationController
       redirect_to "/castles/#{params[:id]}/"
     else
       @castle = Castle.find(params[:id])
-      puts "check for params Ava."
-      puts params[:avatar]
       if params[:avatar]
-        @castle.avatar = nil
-        puts "check that avatar is removed"
-        puts @castle.avatar
         @castle.update(
           castle_name: params[:castle_name],
           avatar: params[:avatar]
