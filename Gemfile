@@ -7,6 +7,7 @@ end
 
 gem 'dotenv-rails'
 gem 'paperclip', "~> 5.0.0"
+gem 'jquery-rails'
 #gem 'aws-sdk', '~> 2.3'
 
 gem 'bootstrap'
