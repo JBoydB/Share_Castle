@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
       flash[:warning] = "You do not have permission to complete this action"
       redirect_to "/castles/#{params[:castle_id]}/"
     else
+      @topics = Topic.where(castle_id: params[:castle_id])
       @castle = Castle.find_by(id: params[:castle_id])
       @topic = Topic.find_by(id: params[:topic_id])
       render :new
@@ -35,6 +36,7 @@ class EntriesController < ApplicationController
       flash[:warning] = "You do not have permission to complete this action"
       redirect_to "/castles/#{params[:castle_id]}/"
     else
+      @topics = Topic.where(castle_id: params[:castle_id])
       @entry = Entry.find_by(id: params[:entry_id])
       render :edit
     end

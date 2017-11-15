@@ -1,27 +1,41 @@
-<h1>Profile</h1>
-<h2> Edit your profile information bellow </h2>
-<%= form_tag '/profile/', method: :patch do %>
-  <div>
-    First Name:
-    <input type='text' name='first_name' value='<%=current_user.first_name%>'>
-  </div>
-  <div>
-    Last Name:
-    <input type='text' name='last_name' value='<%=current_user.last_name%>'>
-  </div>
-  <div>
-    Email:
-    <input type='text' name='email' value='<%=current_user.email%>'>
-  </div>
-  <div>
-    Password:
-    <input type='password' name='password'>
-  </div>
-  <div>
-    Password Confirmation:
-    <input type='password' name='password_confirmation'>
-  </div>  
-  <div>
-    <input type='submit' value='Save Changes'>
-  </div>
-<%end%>
+ <div class="left-padded">
+  <h3>Profile</h3>
+  <h4> Edit your profile information bellow </h4>
+  <%= form_tag '/profile/', method: :patch do %>
+
+    <div class="form-group">
+      <label>First Name:</label>
+      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="<%=current_user.first_name%>">
+    </div>
+
+    <div class="form-group">
+      <label>Last Name:</label>
+      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="<%=current_user.last_name%>">
+    </div>
+
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="text" class="form-control" id="email" name="email" placeholder="<%=current_user.email%>">
+    </div>
+
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="****">
+    </div>
+
+    <div class="form-group">
+      <label>Password Confirmation:</label>
+      <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="****">
+    </div>
+  <%end%>
+</div>
+
+<style>
+  .left-padded {
+    padding-left: 12px;
+  }
+
+  .form-group {
+    width: 500px;
+  }
+</style>

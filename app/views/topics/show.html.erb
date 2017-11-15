@@ -1,70 +1,107 @@
-<h1> <%= @topic.title %> </h1>
-<!-- Role permission check -->
-<h4><%=@role%></h4>
-  <% if @role != "Member" %>
-  <h2>
-    <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/new"%>> New Entry</a>
-  </h2>
-  <h2>
-    <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/url/new"%>> New URL</a>
-  </h2>
-<%end%>
+<div id="content">
+  <div class="container" id="about">
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-md-3">        
+        <!-- Sections Menu-->
+        <div class="nav nav-section-menu">
+          <span class="nav-header">All Topics</span>
+          <%if @topics.length > 0%> 
+            <%@topics.each do |topic|%>
+            <a href="/castles/<%=params[:castle_id]%>/<%=topic.id%>" class="nav-link"><%=topic.title%> <i class="fa fa-angle-right"></i></a>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <!--main content-->
+      <div class="col-md-9">
+        <h2 class="title-divider">
 
-<% @topic.entries.each do |entry| %>
-  <div>
-    <p>
-      <%= entry.entry %>
-    </p>
-    <% if @role != "Member" %>
-      <a href=<%="/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}/edit"%>>Edit</a>
-      <%= form_tag "/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}", method: :delete do %>
-        <input type="submit" value="Delete">
-      <%end%>
-    <%end%>
-  </div>
-<%end%>
+          <!-- TITLE -->
+          <span><%= @topic.title %></span>
+        </h2>
 
-<h2>Resource Links</h2>
-<% @resource_links.each do |url| %>
-  <div>
-    <p>
-      <%= url.url %>
-      <% if @role != "Member" %>
-        <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
-        <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
-        <input type="submit" value="Delete">
-      <%end%>
-    <%end%>
-    </p>
-  </div>
-<%end%>
-
-<h2>Associated Images</h2>
-<% @image_links.each do |url| %>
-  <div>
-    <p>
-      <img src=<%= url.url %>>
-      <% if @role != "Member" %>
-        <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
-        <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
-          <input type="submit" value="Delete">
+        <div>
+          <% if @role != "Member" %>
+            <h5>
+              <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/new"%>> Contribute Information</a>
+            </h5>
+            <h5>
+              <a href=<%="/castles/#{@topic.castle_id}/#{@topic.id}/url/new"%>> Contribute Link</a>
+            </h5>
+            <h5>
+              <%= form_tag "/castles/#{@topic.castle_id}/#{@topic.id}", method: :delete do %>
+                <input type="submit" value="Delete Topic">
+              <%end%>
+            </h5>
+          <%end%>
+        </div>
+        <hr>
+        <!-- Entries -->
+        <% @topic.entries.each do |entry| %>
+          <div>
+            <p>
+              <%= entry.entry %>
+              <% if @role != "Member" %>
+                <br>
+                  <a href=<%="/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}/edit"%>>Edit</a>
+                  <%= form_tag "/castles/#{entry.topic.castle_id}/#{entry.topic.id}/#{entry.id}", method: :delete do %>
+                    <input type="submit" value="Delete">
+                  <%end%>
+              <%end%>
+            </p>
+          </div>
         <%end%>
-      <%end%>
-    </p>
-  </div>
-<%end%>
-
-<h2>YouTube Supporting Videos</h2>
-<% @video_links.each do |video| %>
-  <div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allowfullscreen></iframe>
-      <% if @role != "Member" %>
-        <%= form_tag "/castles/#{video.topic.castle_id}/#{video.topic.id}/url/#{video.id}", method: :delete do %>
-          <input type="submit" value="Remove">
+        <!-- end entries -->
+        <hr>
+        <h3>Resource Links</h3>
+        <!-- Resource Links -->
+        <% @resource_links.each do |url| %>
+          <div>
+            <p>
+              <%= url.url %>
+              <% if @role != "Member" %>
+                <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
+                <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
+                <input type="submit" value="Delete">
+              <%end%>
+            <%end%>
+            </p>
+          </div>
         <%end%>
-      <%end%>
+        <!-- end RLs -->
+        <hr>
+        <!-- Images -->
+        <h3>Online Images</h3>
+        <% @image_links.each do |url| %>
+          <div>
+            <p>
+              <img src=<%= url.url %>>
+              <% if @role != "Member" %>
+                <a href=<%="/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}/edit"%>>Edit</a>
+                <%= form_tag "/castles/#{url.topic.castle_id}/#{url.topic.id}/url/#{url.id}", method: :delete do %>
+                  <input type="submit" value="Delete">
+                <%end%>
+              <%end%>
+            </p>
+          </div>
+        <%end%>
+        <!-- end IMGs -->
+        <hr>
+        <!-- YuTube -->
+        <h3>YouTube Videos</h3>
+        <% @video_links.each do |video| %>
+          <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allowfullscreen></iframe>
+              <% if @role != "Member" %>
+                <%= form_tag "/castles/#{video.topic.castle_id}/#{video.topic.id}/url/#{video.id}", method: :delete do %>
+                  <input type="submit" value="Remove">
+                <%end%>
+              <%end%>
+          </div>
+        <%end%>
+        <!--  -->
+      </div>
+    </div>
   </div>
-<%end%>
-
-<h2>Related Topics</h2>
-TBD
+</div>

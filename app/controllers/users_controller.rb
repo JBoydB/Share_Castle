@@ -17,6 +17,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to "/castles"
     else
+      puts "test"
+      puts user.errors.messages
       redirect_to "/signup"
     end
   end

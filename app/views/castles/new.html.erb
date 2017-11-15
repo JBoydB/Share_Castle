@@ -1,12 +1,26 @@
-<h1> Create a New Castle </h1>
+<div class="left-padded">
+  <div class="modal-body">
+    <h3> Create a New Castle </h3>
+    <br>
+    <%= form_tag "/castles", multipart: true, method: :post do %>
+      <div class="form-group">
+        <label class="sr-only">Castle Name</label>
+        <input type="text" class="form-control" name="castle_name" placeholder="Name your Castle">
+        <br>
+        <%= file_field_tag :avatar %>
+        <br><small>Optional: Add an image (<1000KB) to your Castle Homepage</small>
+      </div>
+      <input type="submit" value="Create">
+    <%end%>
+  </div>
+</div>
 
-<%= form_tag "/castles", multipart: true, method: :post do %>
-  <div>
-    <%= label_tag :castle_name %>
-    <%= text_field_tag :castle_name %>
-  </div>
-  <div>
-    <%= file_field_tag :avatar %>
-  </div>
-  <input type="submit" value="Create">
-<%end%>
+
+<style>
+  .left-padded {
+    padding-left: 12px;
+  }
+  .form-group {
+    width: 500px;
+  }
+</style>

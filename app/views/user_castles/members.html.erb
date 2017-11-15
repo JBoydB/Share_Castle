@@ -1,19 +1,48 @@
-<h1> Welcome to <%= @castle.castle_name %></h1>
+<div id="content">
+  <div class="container" id="about">
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-md-3">        
+        <!-- Sections Menu-->
+        <div class="nav nav-section-menu">
+          <span class="nav-header">All Topics</span>
+          <%if @topics.length > 0%> 
+            <%@topics.each do |topic|%>
+            <a href="/castles/<%=params[:castle_id]%>/<%=topic.id%>" class="nav-link"><%=topic.title%> <i class="fa fa-angle-right"></i></a>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <!--main content-->
+      <div class="col-md-9">
+        <h2 class="title-divider">
 
-<% @members.each do |member| %>
-<div>
-  <p>Member First Name: <%= member.user.first_name %><br>
-  Member Email: <%= member.user.email %><br>
-  Member Role: <%= member.role %></p>
-  <% if member.role != "Owner" %>
-    <%= form_tag "/castles/#{params[:castle_id]}/#{member.user.id}/members", method: :patch do %>
-      <%= label_tag "Permission Role" %>
-      <%= select_tag :role, options_for_select(["Member", "Admin"], member.role) %>
-      <input type='submit' value='Save'>
-    <%end%>
-    <%= form_tag "/castles/#{params[:castle_id]}/#{member.user.id}/members", method: :delete do %>
-      <input type='submit' value='Remove User'>
-    <%end%>
-  <%end%>
+          <!-- TITLE -->
+          <span>Castle Members</span>
+        </h2>
+          
+          <% @members.each do |member| %>
+          <div>
+            <p>Member First Name: <%= member.user.first_name %><br>
+            Member Email: <%= member.user.email %><br>
+            Member Role: <%= member.role %></p>
+            <% if member.role != "Owner" %>
+              
+              <%= form_tag "/castles/#{params[:castle_id]}/#{member.user.id}/members", method: :patch do %>
+                <%= label_tag "Permission Role" %>
+                <%= select_tag :role, options_for_select(["Member", "Admin"], member.role) %>
+                <input type='submit' value='Save'>
+              <%end%>
+
+              <%= form_tag "/castles/#{params[:castle_id]}/#{member.user.id}/members", method: :delete do %>
+                <input type='submit' value='Remove User'>
+              <%end%>
+
+            <%end%>
+          </div>
+          <%end%>
+        <!--  -->
+      </div>
+    </div>
+  </div>
 </div>
-<%end%>

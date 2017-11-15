@@ -1220,7 +1220,7 @@ var loadedFiles = [];
                 $(window).trigger('resize');
               });
             };
-            $document.themeLoadPlugin(["fakeLoader/fakeLoader.min.js"], ["fakeLoader/fakeLoader.css"], themePluginFakeLoaderInit);
+            $document.themeLoadPlugin(["fakeLoader/fakeLoader.min.js"], ["/fakeLoader/fakeLoader.css"], themePluginFakeLoaderInit);
           }
         },
 

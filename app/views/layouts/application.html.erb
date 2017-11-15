@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <% flash.each do |name, message|%>
+      <div> <%= message %> </div> 
+    <%end%>
     <title>ShareCastle</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,8 +29,6 @@
     <!-- Optional: ICON SETS -->
     <!-- Iconset: Font Awesome 4.7.0 via CDN -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Iconset: flag icons - http://lipis.github.io/flag-icon-css/ -->
-    <link href="assets/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
     <!-- Iconset: ionicons - http://ionicons.com/ -->
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <!-- Iconset: Linearicons - https://linearicons.com/free -->
@@ -48,10 +49,10 @@
   <body class="page page-index navbar-layout-default">
     
     <!-- @plugin: page loading indicator, delete to remove loader -->
-    <div class="page-loader" data-toggle="page-loader"></div>
+    <!--<div class="page-loader" data-toggle="page-loader"></div>
     
     <a id="#top" href="#content" class="sr-only">Skip to content</a> 
-    
+     -->
     <!-- ======== @Region: #header ======== -->
     <div id="header">        
         <!--Header & Branding region-->
@@ -67,12 +68,6 @@
               </a>
             </div>
             <!-- other header content -->
-            <div class="header-block order-12">
-              
-            
-              <!-- mobile collapse menu button - data-toggle="collapse" = default BS menu - data-toggle="jpanel-menu" = jPanel Menu - data-toggle="overlay" = Overlay Menu -->
-              <a href="#top" class="btn btn-link btn-icon header-btn float-right d-lg-none" data-toggle="jpanel-menu" data-target=".navbar-main" data-direction="right"> <i class="fa fa-bars"></i> </a>
-            </div>
             
             <div class="navbar navbar-expand-md">
               <!--everything within this div is collapsed on mobile-->
@@ -80,21 +75,55 @@
                 <!--main navigation-->
                 <ul class="nav navbar-nav float-lg-right dropdown-effect-fade">               
                   <!-- Pages -->
-                  <li class="nav-item dropdown">
-                    <a href="/login" class="nav-link dropdown-toggle">Login</a>
-                  </li>
+                  <!-- If not logged in, nav bar shows login and sign up -->
                   <%if current_user == nil %>
+                    <li class="nav-item dropdown">
+                      <a href="/login" class="nav-link dropdown-toggle">Login</a>
+                    </li>
                     <li class="nav-item dropdown">
                       <a href="/signup" class="nav-link dropdown-toggle">Sign Up</a>
                     </li>
                   <%end%>
+
+                  <!-- If logged in, show Castles & Profile links -->
                   <%if current_user != nil %>
+                    <li>
+                      <li class="nav-item dropdown">
+                        <a href="/logout" class="nav-link dropdown-toggle">Logout</a>
+                      </li>
+                    </li>
+
                     <li>
                       <li class="nav-item dropdown">
                         <a href="/castles" class="nav-link dropdown-toggle">Castles</a>
                       </li>
                     </li>
+
+                    <li>
+                      <li class="nav-item dropdown">
+                        <a href="/profile" class="nav-link dropdown-toggle">Profile</a>
+                      </li>
+                    </li>
                   <%end%>
+
+                  <!-- if id (exclusive to castle) show "members" link -->
+                  <% if params[:id] %>
+                    <li>
+                      <li class="nav-item dropdown">
+                        <a href="/castles/<%=params[:id]%>/members" class="nav-link dropdown-toggle">members</a>
+                      </li>
+                    </li>
+                  <%end%>
+
+                  <!-- if castle_id show Castle Home -->
+                  <% if params[:castle_id] %>
+                    <li>
+                      <li class="nav-item dropdown">
+                        <a href="/castles/<%=params[:castle_id]%>" class="nav-link dropdown-toggle">Castle Home</a>
+                      </li>
+                    </li>
+                  <%end%>
+
                   <!-- Mega menu example -->
                 </ul>
               </div>
@@ -242,7 +271,6 @@
       </div>
       <!-- /.modal -->
     </div>
-    
     
     <!--jQuery 3.2.1 via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

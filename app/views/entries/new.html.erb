@@ -1,9 +1,40 @@
-<h1> Create a New Entry </h1>
+<div id="content">
+  <div class="container" id="about">
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-md-3">        
+        <!-- Sections Menu-->
+        <div class="nav nav-section-menu">
+          <span class="nav-header">All Topics</span>
+          <%if @topics.length > 0%> 
+            <%@topics.each do |topic|%>
+            <a href="/castles/<%=params[:id]%>/<%=topic.id%>" class="nav-link"><%=topic.title%> <i class="fa fa-angle-right"></i></a>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <!--main content-->
+      <div class="col-md-9">
+        <h2 class="title-divider">
 
-<%= form_tag "/castles/#{@castle.id}/#{@topic.id}", method: :post do %>
-  <div>
-    <%= label_tag :entry %>
-    <%= text_field_tag :entry %>
+          <!-- TITLE -->
+          <span><%= @topic.title %></span>
+          <small> Submit a new entry </small>
+        </h2>
+        <hr>
+        <div>
+          <%= form_tag "/castles/#{@castle.id}/#{@topic.id}", method: :post do %>
+            <div class="form-group">
+              <label>Entry</label>
+              <textarea class="form-control" id="entry" name="entry" rows="4"></textarea>
+            </div>
+            <br>
+            <input type="submit" value="Create">
+          <%end%>
+        </div>
+
+        <!--  -->
+      </div>
+    </div>
   </div>
-  <input type="submit" value="Create">
-<%end%>
+</div>

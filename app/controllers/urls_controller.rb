@@ -6,6 +6,7 @@ class UrlsController < ApplicationController
       flash[:warning] = "You do not have permission to complete this action"
       redirect_to "/castles/#{params[:castle_id]}/"
     else
+      @topics = Topic.where(castle_id: params[:castle_id])
       @castle = Castle.find_by(id: params[:castle_id])
       @topic = Topic.find_by(id: params[:topic_id])
       render :new
@@ -39,6 +40,7 @@ class UrlsController < ApplicationController
       flash[:warning] = "You do not have permission to complete this action"
       redirect_to "/castles/#{params[:castle_id]}/"
     else
+      @topics = Topic.where(castle_id: params[:castle_id])
       @url = Url.find_by(id: params[:url_id])
       render :edit
     end

@@ -1,22 +1,63 @@
-<h1>Castles</h1>
-<h3><a href="/castles/new">Create a Castle</a></h3>
-
-<h2>Castles You Created:</h2>
-<% @users_castles.each do |user_castle| %>
-  <div>
-    <a href='/castles/<%=user_castle.id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
-  Castle: <%= user_castle.castle_name %> <br>
-  Ruled by: <%= user_castle.user.first_name %>
-    <a data-confirm="Deleting this Castle is permanent and can not be undone, all information within this Castle will be deleted. Do you wish to continue?" data-method="delete" href="/castles/<%=user_castle.id%>/"> <button>Delete</button></a>
-    <a href='/castles/<%=user_castle.id%>/edit'><button>Rename</button></a>
+<div class="left-padded">
+  <h1>Castles</h1>
+  <h3><a href="/castles/new">Create a Castle</a></h3>
+<% if @users_castles.length > 0 %>
+  <h3>Castles you created:</h3>
+  <div class="row grid-inner-borders-dotted">
+    <% @users_castles.each do |user_castle| %>
+      <div class="col-lg-4">
+        <!-- Product 2 -->
+        <div class="card mb-4 product-card overlay-hover">
+          <div class="pos-relative">
+            <a href='/castles/<%=user_castle.id%>'><img class="card-img-top img-fluid" src="<%=user_castle.avatar.url%>"></a>
+          </div>
+          <div class="card-body">
+            <small class="text-muted text-uppercase"><span class="text-primary">Created by: <%= user_castle.user.first_name %></small>
+            <h4 class="card-title">
+              <%= user_castle.castle_name %>
+            </h4>
+          </div>
+          <%= form_tag "/castles/#{user_castle.id}/", method: :delete do %>
+            <button>Delete</button>
+          <%end%>
+          <a href='/castles/<%=user_castle.id%>/edit'><button>Rename</button></a>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+<%else%>
+    <h4> You have not created a Castle yet </h4>
+<%end%>
 
-<h2>Castles you're a part of:</h2>  
-<% @castles_users.each do |castle_user| %>
-  <div>
-    <a href='/castles/<%=castle_user.castle_id%>'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Bodiam-castle-10My8-1197.jpg/220px-Bodiam-castle-10My8-1197.jpg"></a> <br>
-  Castle: <%= castle_user.castle.castle_name %> <br>
-  Ruled by: <%= castle_user.castle.user.first_name %>
+<hr>
+
+<% if @castles_users.length > 0 %>
+  <h3>Castles you've joined:</h3>
+  <div class="row grid-inner-borders-dotted">  
+    <% @castles_users.each do |castle_user| %>
+      <div class="col-lg-4">
+        <!-- Product 2 -->
+        <div class="card mb-4 product-card overlay-hover">
+          <div class="pos-relative">
+            <a href='/castles/<%=castle_user.castle.id%>'><img class="card-img-top img-fluid" src="<%=castle_user.castle.avatar.url%>"></a>
+          </div>
+          <div class="card-body">
+            <small class="text-muted text-uppercase"><span class="text-primary">Created by: <%= castle_user.castle.user.first_name %></span></small>
+            <h4 class="card-title">
+              <%= castle_user.castle.castle_name %>
+            </h4>
+          </div>
+        </div>
+      </div>
+    <%end%>
   </div>
-<% end %>
+<% else %>
+  <h4> You have not joined a Castle yet </h4>
+<%end%>
+</div>
+
+<style>
+  .left-padded {
+    padding-left: 12px;
+  }
+</style>

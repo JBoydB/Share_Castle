@@ -1,13 +1,43 @@
-<h1> Add a New URL </h1>
+<div id="content">
+  <div class="container" id="about">
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-md-3">        
+        <!-- Sections Menu-->
+        <div class="nav nav-section-menu">
+          <span class="nav-header">All Topics</span>
+          <%if @topics.length > 0%> 
+            <%@topics.each do |topic|%>
+            <a href="/castles/<%=params[:castle_id]%>/<%=topic.id%>" class="nav-link"><%=topic.title%> <i class="fa fa-angle-right"></i></a>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <!--main content-->
+      <div class="col-md-9">
+        <h2 class="title-divider">
 
-<%= form_tag "/castles/#{@castle.id}/#{@topic.id}/url", method: :post do %>
-  <div>
-    <%= label_tag :url %>
-    <%= text_field_tag :url %>
+          <!-- TITLE -->
+          <span>Add URL</span>
+        </h2>
+        <hr>
+
+        <%= form_tag "/castles/#{@castle.id}/#{@topic.id}/url", method: :post do %>
+          <div>
+            <label>Url</label>
+            <input type="text" class="form-control" name="url" placeholder="Enter URL">
+          </div>
+          <br>
+          <div>
+            <%= label_tag :url_type %>
+            <%= select_tag :url_type, raw("<option>Resource Link</option><option>Image</option><option>Video</option>") %>
+          </div>
+          <br>
+          <input type="submit" value="Create">
+        <%end%>
+
+        <!--  -->
+      </div>
+    </div>
   </div>
-  <div>
-    <%= label_tag :url_type %>
-    <%= select_tag :url_type, raw("<option>Resource Link</option><option>Image</option><option>Video</option>") %>
-  </div>
-  <input type="submit" value="Create">
-<%end%>
+</div>

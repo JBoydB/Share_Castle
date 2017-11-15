@@ -51,6 +51,7 @@ class TopicsController < ApplicationController
   end
 
   def show
+    @topics = Topic.where(castle_id: params[:castle_id])
     @role = UserCastle.find_by(user_id: current_user.id, castle_id: params[:castle_id]).role
     @topic = Topic.find(params[:topic_id])
     @resource_links = @topic.urls.where(topic_id: params[:topic_id], url_type: "Resource Link")
