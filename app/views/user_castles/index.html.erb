@@ -9,7 +9,7 @@
         <!-- Product 2 -->
         <div class="card mb-4 product-card overlay-hover">
           <div class="pos-relative">
-            <a href='/castles/<%=user_castle.id%>'><img class="card-img-top img-fluid" src="<%=user_castle.avatar.url%>"></a>
+            <a href='/castles/<%=user_castle.id%>'><img width="300" height="300" class="card-img-top img-fluid" src="<%=user_castle.avatar.url%>"></a>
           </div>
           <div class="card-body">
             <small class="text-muted text-uppercase"><span class="text-primary">Created by: <%= user_castle.user.first_name %></small>
@@ -39,7 +39,7 @@
         <!-- Product 2 -->
         <div class="card mb-4 product-card overlay-hover">
           <div class="pos-relative">
-            <a href='/castles/<%=castle_user.castle.id%>'><img class="card-img-top img-fluid" src="<%=castle_user.castle.avatar.url%>"></a>
+            <a href='/castles/<%=castle_user.castle.id%>'><img  width="300" height="300" class="card-img-top img-fluid" src="<%=castle_user.castle.avatar.url%>"></a>
           </div>
           <div class="card-body">
             <small class="text-muted text-uppercase"><span class="text-primary">Created by: <%= castle_user.castle.user.first_name %></span></small>
